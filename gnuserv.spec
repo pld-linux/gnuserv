@@ -13,7 +13,7 @@ URL:		http://meltin.net/hacks/emacs/
 BuildRequires:	autoconf
 Requires:	emacs
 Requires:	gnuserv-elisp = %{version}-%{release}
-Conflicts:      xemacs
+Conflicts:	xemacs
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define version_of() %{expand:%%(rpm -q %1 --queryformat '%%%%{version}-%%%%{release}')}
@@ -59,7 +59,7 @@ Kod ¼ród³owy elisp gnuserv
 Summary:	gnuserv client program
 Summary(pl):	Program kliencki dla gnuserv
 Group:		Applications/Editors/Emacs
-Conflicts:      xemacs
+Conflicts:	xemacs
 
 %description client
 A client program for gnuserv.
