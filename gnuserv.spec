@@ -2,7 +2,7 @@ Summary:	Gnuserv - editing server for Emacs
 Summary(pl):	Gnuserv - serwer dla Emacsa
 Name:		gnuserv
 Version:	3.12.6
-Release:	3
+Release:	4
 License:	GPL v2+
 Group:		Applications/Editors/Emacs
 Vendor:		Martin Schwenke <martin@meltin.net>
@@ -12,7 +12,11 @@ Patch0:		%{name}-mandir.patch
 URL:		http://meltin.net/hacks/emacs/
 BuildRequires:	autoconf
 Requires:	emacs
+Requires:	gnuserv-elisp = %{version}-%{release}
+Conflicts:      xemacs
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define version_of() %{expand:%%(rpm -q %1 --queryformat '%%%%{version}-%%%%{release}')}
 
 %description
 gnuserv allows you to attach to an already running Emacs. This allows
@@ -24,10 +28,38 @@ gnuserv pozwala innym programom po³±czyæ siê z uruchomionym Emacsem.
 Umo¿liwia im to korzystanie z Emacsa jako edytora. Jest podobny do
 emacsserver/server.el GNU Emacsa, ale du¿o bardziej rozbudowany.
 
+%package elisp
+Summary:	Compiled elisp files for gnuserv
+Summary(pl):	Skompilowany kod elisp gnuserv
+Group:		Applications/Editors/Emacs
+BuildArch:	noarch
+Requires:	emacs = %{version_of emacs}
+Requires:	%{_bindir}/gnuserv
+
+%description elisp
+Compiled elisp files for gnuserv
+
+%description elisp -l pl
+Skompilowany kod elisp gnuserv
+
+%package elisp-el
+Summary:	Source elisp files for gnuserv
+Summary(pl):	Kod ¼ród³owy elisp gnuserv
+Group:		Applications/Editors/Emacs
+BuildArch:	noarch
+Requires:	%{name}-elisp = %{version}-%{release}
+
+%description elisp-el
+Source elisp files for gnuserv
+
+%description elisp-el -l pl
+Kod ¼ród³owy elisp gnuserv
+
 %package client
 Summary:	gnuserv client program
 Summary(pl):	Program kliencki dla gnuserv
 Group:		Applications/Editors/Emacs
+Conflicts:      xemacs
 
 %description client
 A client program for gnuserv.
@@ -52,8 +84,9 @@ echo '#define SYS_SIGLIST_DECLARED 1 /* Kludge! */' >> config.h
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_emacs_lispdir}
 
-%makeinstall install-elisp \
-	 elispdir=$RPM_BUILD_ROOT%{_emacs_lispdir}
+%makeinstall
+install -d $RPM_BUILD_ROOT%{_emacs_lispdir}
+install *.elc *.el $RPM_BUILD_ROOT%{_emacs_lispdir}
 
 for man in `find $RPM_BUILD_ROOT%{_mandir} -type l`; do
 	target=`readlink $man`
@@ -68,8 +101,14 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc README README.orig ChangeLog
 %attr(755,root,root) %{_bindir}/gnuserv
-%{_emacs_lispdir}/gnuserv.el
-%{_emacs_lispdir}/gnuserv.elc
+
+%files elisp
+%defattr(644,root,root,755)
+%{_emacs_lispdir}/*.elc
+
+%files elisp-el
+%defattr(644,root,root,755)
+%{_emacs_lispdir}/*.el
 
 %files client
 %defattr(644,root,root,755)
