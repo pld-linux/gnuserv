@@ -2,12 +2,13 @@ Summary:	Gnuserv - editing server for Emacs
 Summary(pl):	Gnuserv - serwer dla Emacsa
 Name:		gnuserv
 Version:	3.12.6
-Release:	2
+Release:	3
 License:	GPL v2+
 Group:		Applications/Editors/Emacs
 Vendor:		Martin Schwenke <martin@meltin.net>
 Source0:	http://meltin.net/hacks/emacs/src/%{name}-%{version}.tar.gz
 # Source0-md5:	011a6644c193579245ca09eaae8c9850
+Patch0:		%{name}-mandir.patch
 URL:		http://meltin.net/hacks/emacs/
 BuildRequires:	autoconf
 Requires:	emacs
@@ -36,6 +37,7 @@ Program kliencki dla gnuserv.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %{__autoconf}
@@ -52,6 +54,12 @@ install -d $RPM_BUILD_ROOT%{_emacs_lispdir}
 
 %makeinstall install-elisp \
 	 elispdir=$RPM_BUILD_ROOT%{_emacs_lispdir}
+
+for man in `find $RPM_BUILD_ROOT%{_mandir} -type l`; do
+	target=`readlink $man`
+	rm $man
+	echo ".so $target" > $man
+done
 
 %clean
 rm -rf $RPM_BUILD_ROOT
