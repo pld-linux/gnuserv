@@ -1,4 +1,3 @@
-#
 Summary:	Gnuserv - editing server for Emacs
 Summary(pl):	Gnuserv - serwer dla Emacsa
 Name:		gnuserv
@@ -42,16 +41,17 @@ Program kliencki dla gnuserv.
 %{__autoconf}
 %{__autoheader}
 
-%{configure}
+%configure
 echo '#define SYS_SIGLIST_DECLARED 1 /* Kludge! */' >> config.h
 
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%{__mkdir} -p $RPM_BUILD_ROOT/%{_emacs_lispdir}
-%{makeinstall} elispdir=$RPM_BUILD_ROOT/%{_emacs_lispdir} install-elisp
-%{__mv} $RPM_BUILD_ROOT%{_mandir} $RPM_BUILD_ROOT/%{_mandir}
+install -d $RPM_BUILD_ROOT%{_emacs_lispdir}
+
+%makeinstall install-elisp \
+	 elispdir=$RPM_BUILD_ROOT%{_emacs_lispdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -59,13 +59,12 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc README README.orig ChangeLog
-%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/gnuserv
 %{_emacs_lispdir}/gnuserv.el
 %{_emacs_lispdir}/gnuserv.elc
-%attr(0755,root,root)%{_bindir}/gnuserv
 
 %files client
 %defattr(644,root,root,755)
-%attr(0755,root,root)%{_bindir}/gnuclient
-%attr(0755,root,root)%{_bindir}/gnudoit
+%attr(755,root,root) %{_bindir}/gnuclient
+%attr(755,root,root) %{_bindir}/gnudoit
 %{_mandir}/*/*
