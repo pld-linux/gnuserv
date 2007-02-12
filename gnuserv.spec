@@ -1,5 +1,5 @@
 Summary:	Gnuserv - editing server for Emacs
-Summary(pl):	Gnuserv - serwer dla Emacsa
+Summary(pl.UTF-8):   Gnuserv - serwer dla Emacsa
 Name:		gnuserv
 Version:	3.12.6
 Release:	4
@@ -23,14 +23,14 @@ gnuserv allows you to attach to an already running Emacs. This allows
 external programs to make use of Emacs' editing capabilities. It is
 like GNU Emacs' emacsserver/server.el, but has many more features.
 
-%description -l pl
-gnuserv pozwala innym programom po³±czyæ siê z uruchomionym Emacsem.
-Umo¿liwia im to korzystanie z Emacsa jako edytora. Jest podobny do
-emacsserver/server.el GNU Emacsa, ale du¿o bardziej rozbudowany.
+%description -l pl.UTF-8
+gnuserv pozwala innym programom poÅ‚Ä…czyÄ‡ siÄ™ z uruchomionym Emacsem.
+UmoÅ¼liwia im to korzystanie z Emacsa jako edytora. Jest podobny do
+emacsserver/server.el GNU Emacsa, ale duÅ¼o bardziej rozbudowany.
 
 %package elisp
 Summary:	Compiled elisp files for gnuserv
-Summary(pl):	Skompilowany kod elisp gnuserv
+Summary(pl.UTF-8):   Skompilowany kod elisp gnuserv
 Group:		Applications/Editors/Emacs
 BuildArch:	noarch
 Requires:	emacs = %{version_of emacs}
@@ -39,12 +39,12 @@ Requires:	%{_bindir}/gnuserv
 %description elisp
 Compiled elisp files for gnuserv
 
-%description elisp -l pl
+%description elisp -l pl.UTF-8
 Skompilowany kod elisp gnuserv
 
 %package elisp-el
 Summary:	Source elisp files for gnuserv
-Summary(pl):	Kod ¼ród³owy elisp gnuserv
+Summary(pl.UTF-8):   Kod ÅºrÃ³dÅ‚owy elisp gnuserv
 Group:		Applications/Editors/Emacs
 BuildArch:	noarch
 Requires:	%{name}-elisp = %{version}-%{release}
@@ -52,19 +52,19 @@ Requires:	%{name}-elisp = %{version}-%{release}
 %description elisp-el
 Source elisp files for gnuserv
 
-%description elisp-el -l pl
-Kod ¼ród³owy elisp gnuserv
+%description elisp-el -l pl.UTF-8
+Kod ÅºrÃ³dÅ‚owy elisp gnuserv
 
 %package client
 Summary:	gnuserv client program
-Summary(pl):	Program kliencki dla gnuserv
+Summary(pl.UTF-8):   Program kliencki dla gnuserv
 Group:		Applications/Editors/Emacs
 Conflicts:	xemacs
 
 %description client
 A client program for gnuserv.
 
-%description client -l pl
+%description client -l pl.UTF-8
 Program kliencki dla gnuserv.
 
 %prep
