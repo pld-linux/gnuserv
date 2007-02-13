@@ -1,5 +1,5 @@
 Summary:	Gnuserv - editing server for Emacs
-Summary(pl.UTF-8):   Gnuserv - serwer dla Emacsa
+Summary(pl.UTF-8):	Gnuserv - serwer dla Emacsa
 Name:		gnuserv
 Version:	3.12.6
 Release:	4
@@ -30,7 +30,7 @@ emacsserver/server.el GNU Emacsa, ale dużo bardziej rozbudowany.
 
 %package elisp
 Summary:	Compiled elisp files for gnuserv
-Summary(pl.UTF-8):   Skompilowany kod elisp gnuserv
+Summary(pl.UTF-8):	Skompilowany kod elisp gnuserv
 Group:		Applications/Editors/Emacs
 BuildArch:	noarch
 Requires:	emacs = %{version_of emacs}
@@ -44,7 +44,7 @@ Skompilowany kod elisp gnuserv
 
 %package elisp-el
 Summary:	Source elisp files for gnuserv
-Summary(pl.UTF-8):   Kod źródłowy elisp gnuserv
+Summary(pl.UTF-8):	Kod źródłowy elisp gnuserv
 Group:		Applications/Editors/Emacs
 BuildArch:	noarch
 Requires:	%{name}-elisp = %{version}-%{release}
@@ -57,7 +57,7 @@ Kod źródłowy elisp gnuserv
 
 %package client
 Summary:	gnuserv client program
-Summary(pl.UTF-8):   Program kliencki dla gnuserv
+Summary(pl.UTF-8):	Program kliencki dla gnuserv
 Group:		Applications/Editors/Emacs
 Conflicts:	xemacs
 
