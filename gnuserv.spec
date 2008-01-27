@@ -2,21 +2,20 @@ Summary:	Gnuserv - editing server for Emacs
 Summary(pl.UTF-8):	Gnuserv - serwer dla Emacsa
 Name:		gnuserv
 Version:	3.12.6
-Release:	4
+Release:	5
 License:	GPL v2+
 Group:		Applications/Editors/Emacs
-Vendor:		Martin Schwenke <martin@meltin.net>
 Source0:	http://meltin.net/hacks/emacs/src/%{name}-%{version}.tar.gz
 # Source0-md5:	011a6644c193579245ca09eaae8c9850
 Patch0:		%{name}-mandir.patch
 URL:		http://meltin.net/hacks/emacs/
 BuildRequires:	autoconf
+BuildRequires:	rpmbuild(macros) >= 1.402
 Requires:	emacs
 Requires:	gnuserv-elisp = %{version}-%{release}
 Conflicts:	xemacs
+BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
-%define version_of() %{expand:%%(rpm -q %1 --queryformat '%%%%{version}-%%%%{release}')}
 
 %description
 gnuserv allows you to attach to an already running Emacs. This allows
@@ -32,9 +31,8 @@ emacsserver/server.el GNU Emacsa, ale dużo bardziej rozbudowany.
 Summary:	Compiled elisp files for gnuserv
 Summary(pl.UTF-8):	Skompilowany kod elisp gnuserv
 Group:		Applications/Editors/Emacs
-BuildArch:	noarch
-Requires:	emacs = %{version_of emacs}
 Requires:	%{_bindir}/gnuserv
+%requires_eq emacs
 
 %description elisp
 Compiled elisp files for gnuserv
@@ -46,7 +44,6 @@ Skompilowany kod elisp gnuserv
 Summary:	Source elisp files for gnuserv
 Summary(pl.UTF-8):	Kod źródłowy elisp gnuserv
 Group:		Applications/Editors/Emacs
-BuildArch:	noarch
 Requires:	%{name}-elisp = %{version}-%{release}
 
 %description elisp-el
@@ -87,12 +84,6 @@ install -d $RPM_BUILD_ROOT%{_emacs_lispdir}
 %makeinstall
 install -d $RPM_BUILD_ROOT%{_emacs_lispdir}
 install *.elc *.el $RPM_BUILD_ROOT%{_emacs_lispdir}
-
-for man in `find $RPM_BUILD_ROOT%{_mandir} -type l`; do
-	target=`readlink $man`
-	rm $man
-	echo ".so $target" > $man
-done
 
 %clean
 rm -rf $RPM_BUILD_ROOT
